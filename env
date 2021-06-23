@@ -20,7 +20,7 @@ CI_ENVIRONMENT = developement
 # APP
 #--------------------------------------------------------------------
 
-# app.baseURL = 'mp'
+app.baseURL = 'https://gonzaloguerra76-melicert.herokuapp.com/'
 # app.forceGlobalSecureRequests = false
 
 # app.sessionDriver = 'CodeIgniter\Session\Handlers\FileHandler'
