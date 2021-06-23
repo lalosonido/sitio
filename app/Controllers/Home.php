@@ -123,7 +123,7 @@ class Home extends BaseController
         $data['estado'] = $this->request->getUri()->getSegment(1);
 
         switch ($data['estado']){
-            case 'aprobado':
+            case 'aprobada':
                 $data['estado_color'] = '#76FF03';
                 $data['texto'] = "Felicitaciones ya pagaste tu nuevo ";
                 break;
