@@ -104,11 +104,10 @@ class Home extends BaseController
                 return redirect()->to('aprobada/'.$venta['id_venta']);
                 break;
             case 'pending':
-
-
-
+                return redirect()->to('pendiente/'.$venta['id_venta']);
                 break;
             case 'rejected':
+                return redirect()->to('rechazado/'.$venta['id_venta']);
                 break;
             default:
                 break;
@@ -120,6 +119,27 @@ class Home extends BaseController
         $modelo = new VentaModel();
         $data['venta'] = $modelo->get_detalle_venta($id)[0];
         $data['estado'] = $this->request->getUri()->getSegment(1);
+
+
+
+        switch ($data['estado']){
+            case 'aprobado':
+                $data['estado_color'] = 'success';
+                $data['texto'] = "Felicitaciones ya pagaste tu nuevo ";
+                break;
+            case 'pendiente':
+                $data['estado_color'] = 'warning';
+                $data['texto'] = "El pago aún se encuentra pendiente, pero no te preocupes, te mandaremos un mail cuando logremos procesarlo";
+                break;
+            case 'rechazado':
+                $data['estado_color'] = 'danger';
+                $data['texto'] = "Lo lamentamos, no pudimos concretar el pago, vuelve a intenarlo con otro medio";
+                break;
+        }
+
+
+
+
 
         echo view('header');
         echo view('finalizar', $data);

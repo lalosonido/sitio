@@ -38,6 +38,8 @@ $routes->post('detalle', 'Home::detalle_telefono');
 $routes->post('get_preference', 'Home::get_preference');
 $routes->get('feedback', 'Home::feedback');
 $routes->get('aprobada/(:num)', 'Home::result/$1');
+$routes->get('pendiente/(:num)', 'Home::result/$1');
+$routes->get('rechazado/(:num)', 'Home::result/$1');
 
 /*
  * --------------------------------------------------------------------

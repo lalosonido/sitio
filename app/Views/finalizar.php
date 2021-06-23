@@ -67,7 +67,7 @@
                                     <div class="as-producttile-title">
                                         <h3 class="as-producttile-name">
                                             <p class="as-producttile-tilelink">
-                                                <span data-ase-truncate="2">Felicitaciones ya pagaste tu nuevo </span>
+                                                <span data-ase-truncate="2"><?=$texto?></span>
                                             </p>
                                         </h3>
                                     </div>
@@ -80,7 +80,7 @@
                                     <h3>
                                         Total <b>$ <?=$venta['total'] ?></b>
                                     </h3>
-                                    <h3>Estado <?=strtoupper($estado)?></h3>
+                                    <h3>Estado <span class="text-<?=$estado_color?>"><?=strtoupper($estado)?></span></h3>
                                     <h3>Confirmación MP <?=$venta['payment_id']?></h3>
                                 </div>
 
