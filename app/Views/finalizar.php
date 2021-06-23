@@ -56,7 +56,7 @@
                                                 <img src="./assets/<?=$venta['img']?>"
                                                      class="ir ir item-image as-producttile-image" alt="" width="445"
                                                      height="445"
-                                                     style="content:-webkit-image-set(url(<?=$venta['img'] ?>) 2x);">
+                                                     style="content:-webkit-image-set(url(<?=$venta['img']?>) 2x);">
                                             </div>
                                         </div>
                                     </div>
@@ -67,7 +67,7 @@
                                     <div class="as-producttile-title">
                                         <h3 class="as-producttile-name">
                                             <p class="as-producttile-tilelink">
-                                                <span data-ase-truncate="2"><?=$venta['title']?>></span>
+                                                <span data-ase-truncate="2"><?=$venta['title']?></span>
                                             </p>
                                         </h3>
                                     </div>
@@ -75,9 +75,10 @@
                                         Unidades <?=$venta['qty']?>
                                     </h3>
                                     <h3>
-                                        Total <b>"$ "<?=$venta['total'] ?></b>
+                                        Total <b>$ <?=$venta['total'] ?></b>
                                     </h3>
                                     <h3>Estado <?=strtoupper($estado)?></h3>
+                                    <h3>Confirmación MP <?=$venta['payment_id']?></h3>
                                 </div>
 
                             </div>
