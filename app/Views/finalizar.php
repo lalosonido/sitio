@@ -82,7 +82,7 @@
                                     </h3>
                                     <h3>Estado <span style="color:<?=$estado_color?>"><?=strtoupper($estado)?></span></h3>
                                     <h3>Confirmación MP <?=$venta['payment_id']?></h3>
-                                    <?=anchor('','Volver al inicio');?>
+                                    <?=anchor('','Volver a comprar','class="mercadopago-button"');?>
                                 </div>
 
                             </div>

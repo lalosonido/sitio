@@ -110,8 +110,9 @@ class Home extends BaseController
                 return redirect()->to('rechazado/'.$venta['id_venta']);
                 break;
             case 'null':
-                echo "CANCELADA";
+                return redirect()->to('cancelado/'.$venta['id_venta']);
             default:
+                return redirect()->to('cancelado/'.$venta['id_venta']);
                 break;
         }
 
@@ -134,6 +135,11 @@ class Home extends BaseController
             case 'rechazado':
                 $data['estado_color'] = '#F44336';
                 $data['texto'] = "Lo lamentamos, no pudimos concretar el pago, vuelve a intenarlo con otro medio";
+                break;
+                case 'cancelado':
+                $data['estado_color'] = '#00B0FF';
+                $data['texto'] = "Lamentamos que hayas cancelado la operación, velve a intentarlo cuando quieras!";
+                $data['estado'] = 'CANCELADA';
                 break;
         }
 

@@ -40,6 +40,7 @@ $routes->get('feedback', 'Home::feedback');
 $routes->get('aprobada/(:num)', 'Home::result/$1');
 $routes->get('pendiente/(:num)', 'Home::result/$1');
 $routes->get('rechazado/(:num)', 'Home::result/$1');
+$routes->get('cancelado/(:num)', 'Home::result/$1');
 
 /*
  * --------------------------------------------------------------------
