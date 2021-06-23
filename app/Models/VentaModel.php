@@ -7,6 +7,6 @@ class VentaModel extends Model {
     protected $table         = "venta";
     protected $primaryKey    = 'id_venta';
     protected $returnType    = 'array';
-    protected $allowedFields = ['preference_id','payment_id','status'];
+    protected $allowedFields = ['preference_id','payment_id','status','id_producto','qty'];
 
 }

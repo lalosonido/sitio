@@ -1,6 +1,7 @@
 <?php namespace App\Controllers;
 
 use App\Models\ProductoModel;
+use App\Models\VentaModel;
 
 class Home extends BaseController
 {
@@ -85,7 +86,32 @@ class Home extends BaseController
     }
 
     public function feedback(){
-	    dd($_GET);
+        $model = new VentaModel();
+        $venta = $model->getWhere(['preference_id'=>$this->request->get('preference_id')])->getFirstRow();
+        $data = [];
+        $data['id_venta'] = $venta['id_venta'];
+        $data['payment_id'] = $this->request->get('payment_id');
+        $data['status'] = $this->request->get('status');
+        $model->save($data);
+	    switch ($this->request->get('status')){
+            case 'approved':
+                redirect()->to('aprobada/'.$venta['id_venta']);
+                break;
+            case 'pending':
+
+                break;
+            case 'rejected':
+
+                break;
+            default:
+                break;
+        }
+    }
+
+    public function result($id){
+
+        dd($_GET);
+
     }
 
 	public function get_preference(){
@@ -104,9 +130,9 @@ class Home extends BaseController
             $item->unit_price = $this->request->getPost('unit_price');//data->price;
             $preference->items = array($item);
             $preference->back_urls = array(
-                "success" => "http://localhost/mp/feedback",
-                "failure" => "http://localhost/mp/feedback",
-                "pending" => "http://localhost/mp/feedback"
+                "success" => base_url("feedback"),
+                "failure" => base_url("feedback"),
+                "pending" => base_url("feedback")
             );
             $preference->auto_return = "approved";
             $preference->save();
@@ -114,6 +140,16 @@ class Home extends BaseController
             $response = array(
                 'id' => $preference->id,
             );
+
+            $modelo = new VentaModel();
+
+            $data = [];
+            $data['preference_id'] = $preference->id;
+            $data['id_producto'] = $this->request->getPost('id_producto');
+            $data['qty'] = $this->request->getPost('quantity');
+
+            $modelo->save($data);
+
             return $this->response->setJSON($response);
         } else {
             redirect('home');

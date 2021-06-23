@@ -8,5 +8,4 @@ class ProductoModel extends Model
     protected $primaryKey = 'id_producto';
     protected $returnType     = 'array';
     protected $allowedFields = ['img', 'title', 'price'];
-
 }
