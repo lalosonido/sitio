@@ -104,6 +104,9 @@ class Home extends BaseController
                 return redirect()->to('aprobada/'.$venta['id_venta']);
                 break;
             case 'pending':
+
+
+
                 break;
             case 'rejected':
                 break;
@@ -115,10 +118,15 @@ class Home extends BaseController
 
     public function result($id){
         $modelo = new VentaModel();
+        $venta = $modelo->get_detalle_venta($id)[0];
 
-        echo var_dump($modelo->get_detalle_venta($id));
-        exit;
+        $uri = $request->uri;
 
+
+
+        echo view('header');
+        echo view('finalizar', [$venta, $uri->getPath()]);
+        echo view('footer');
     }
 
 	public function get_preference(){
