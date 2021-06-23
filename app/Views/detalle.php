@@ -75,9 +75,13 @@
                                             </p>
                                         </h3>
                                     </div>
-                                    <h3>
-                                        <?php echo $_POST['unit'] ?>
-                                    </h3>
+                                    <div class="form-group">
+                                        <label for="cant">Cantidad</label>
+                                        <input type="number" class="form-control" id="cant" value="<?=$_POST['unit']?>"/>
+                                    </div>
+<!--                                    <h3>
+                                        <?php /*echo $_POST['unit'] */?>
+                                    </h3>-->
                                     <h3>
                                         <?php echo "$" . $_POST['price'] ?>
                                     </h3>
@@ -156,7 +160,15 @@
            },"json");
 
 
-       })
+       });
+
+
+       $("#cant").blur(function(e){
+           $("#quantity").val($(this).val());
+       });
+
+
+
     });
 
 
