@@ -87,11 +87,11 @@ class Home extends BaseController
 
     public function feedback(){
         $model = new VentaModel();
-        $venta = $model->getWhere(['preference_id'=>$this->request->get('preference_id')])->getFirstRow();
+        $venta = $model->getWhere(['preference_id'=>$this->request->getGet('preference_id')])->getFirstRow();
         $data = [];
         $data['id_venta'] = $venta['id_venta'];
-        $data['payment_id'] = $this->request->get('payment_id');
-        $data['status'] = $this->request->get('status');
+        $data['payment_id'] = $this->request->getGet('payment_id');
+        $data['status'] = $this->request->getGet('status');
         $model->save($data);
 	    switch ($this->request->get('status')){
             case 'approved':
