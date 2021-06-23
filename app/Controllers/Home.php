@@ -51,6 +51,7 @@ class Home extends BaseController
             <input type="hidden" name="title" value="{title}">
             <input type="hidden" name="price" value="{price}">
             <input type="hidden" name="unit" value="1">
+            <input type="hidden" name="id_producto" value="{id_producto}">
             <button type="submit" class="mercadopago-button" formmethod="post">Comprar</button>
         </form>
     </div>
