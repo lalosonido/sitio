@@ -109,6 +109,8 @@ class Home extends BaseController
             case 'rejected':
                 return redirect()->to('rechazado/'.$venta['id_venta']);
                 break;
+            case 'null':
+                echo "CANCELADA";
             default:
                 break;
         }
@@ -119,8 +121,6 @@ class Home extends BaseController
         $modelo = new VentaModel();
         $data['venta'] = $modelo->get_detalle_venta($id)[0];
         $data['estado'] = $this->request->getUri()->getSegment(1);
-
-
 
         switch ($data['estado']){
             case 'aprobado':
@@ -136,10 +136,6 @@ class Home extends BaseController
                 $data['texto'] = "Lo lamentamos, no pudimos concretar el pago, vuelve a intenarlo con otro medio";
                 break;
         }
-
-
-
-
 
         echo view('header');
         echo view('finalizar', $data);
