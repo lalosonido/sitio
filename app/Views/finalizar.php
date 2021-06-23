@@ -7,7 +7,7 @@
                     <div class="pd-billboard pd-category-header">
                         <div class="pd-l-plate-scale">
                             <div class="pd-billboard-background">
-                                <img src="./assets/music-audio-alp-201709" alt="" width="1440" height="320"
+                                <img src="../assets/music-audio-alp-201709" alt="" width="1440" height="320"
                                      data-scale-params-2="wid=2880&amp;hei=640&amp;fmt=jpeg&amp;qlt=95&amp;op_usm=0.5,0.5&amp;.v=1503948581306"
                                      class="pd-billboard-hero ir">
                             </div>
@@ -43,7 +43,7 @@
                         <div class="width:60%">
                             <div class="as-producttile-tilehero with-paddlenav " style="float:left;">
                                 <div class="as-dummy-container as-dummy-img">
-                                    <img src="./assets/wireless-headphones"
+                                    <img src="../assets/wireless-headphones"
                                          class="ir ir item-image as-producttile-image  "
                                          style="max-width: 70%;max-height: 70%;" alt="" width="445" height="445">
                                 </div>
@@ -53,7 +53,7 @@
                                              data-relatedlink="6|Powerbeats3 Wireless Earphones - Neighborhood Collection - Brick Red|MPXP2">
                                             <div class="as-tilegallery-element as-image-selected">
                                                 <div class=""></div>
-                                                <img src="./assets/<?=$venta['img']?>"
+                                                <img src="../assets/<?=$venta['img']?>"
                                                      class="ir ir item-image as-producttile-image" alt="" width="445"
                                                      height="445"
                                                      style="content:-webkit-image-set(url(<?=$venta['img']?>) 2x);">

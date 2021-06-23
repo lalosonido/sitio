@@ -14,13 +14,13 @@
 
     <script src="https://secure.mlstatic.com/sdk/javascript/v1/mercadopago.js"></script>
 
-    <link rel="stylesheet" href="./assets/category-landing.css" media="screen, print">
+    <link rel="stylesheet" href="<?=base_url()?>/assets/category-landing.css" media="screen, print">
 
-    <link rel="stylesheet" href="./assets/category.css" media="screen, print">
+    <link rel="stylesheet" href="<?=base_url()?>/assets/category.css" media="screen, print">
 
-    <link rel="stylesheet" href="./assets/merch-tools.css" media="screen, print">
+    <link rel="stylesheet" href="<?=base_url()?>/assets/merch-tools.css" media="screen, print">
 
-    <link rel="stylesheet" href="./assets/fonts" media="">
+    <link rel="stylesheet" href="<?=base_url()?>/assets/fonts" media="">
     <style>
         .as-filter-button-text {
             font-size: 26px;
