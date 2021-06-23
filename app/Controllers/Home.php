@@ -120,7 +120,7 @@ class Home extends BaseController
         $modelo = new VentaModel();
         $venta = $modelo->get_detalle_venta($id)[0];
 
-        $uri = $request->uri;
+        $uri = $this->request->uri;
 
 
 
