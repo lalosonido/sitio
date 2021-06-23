@@ -98,9 +98,6 @@ class Home extends BaseController
         $data['status'] = $this->request->getGet('status');
 
         $model->save($data);
-/*
-        echo var_dump([$_GET,$venta]);
-        die();*/
 
         switch ($this->request->getGet('status')){
             case 'approved':
@@ -117,8 +114,10 @@ class Home extends BaseController
     }
 
     public function result($id){
+        $modelo = new VentaModel();
 
-        dd($_GET);
+        echo var_dump($modelo->get_detalle_venta($id));
+        exit;
 
     }
 
