@@ -70,10 +70,11 @@
                                     <div class="as-producttile-title">
                                         <h3 class="as-producttile-name">
                                             <p class="as-producttile-tilelink">
-                                                <span data-ase-truncate="2"><?php echo $_POST['title'] ?></span>
+                                                <span data-ase-truncate="2"><?=$_POST['title'] ?></span>
                                                 <input type="hidden" id="title" value="<?=$_POST['title']?>">
                                                 <input type="hidden" id="price" value="<?=$_POST['price']?>">
                                                 <input type="hidden" id="quantity" value="<?=$_POST['unit']?>">
+                                                <input type="hidden" id="id_producto" value="<?=$_POST['id_producto']?>">
                                             </p>
                                         </h3>
                                     </div>
@@ -144,11 +145,16 @@
        $(".mercadopago-button").click(function(e){
            e.preventDefault();
 
-           var description = $("#description").val();
+           var description = $("#title").val();
            var quantity = $('#quantity').val();
-           var unit_price = $('#price').val();//data->price;
+           var unit_price = $('#price').val();
+           var id_producto = $("#id_producto").val();
 
-           $.post('get_preference',{description:description, quantity:quantity, unit_price:unit_price}, function(datos){
+           $.post('get_preference',{description:description,
+                                    quantity:quantity,
+                                    unit_price:unit_price,
+                                    id_producto:id_producto},
+               function(datos){
                document.location = "https://sandbox.mercadopago.com.ar/checkout/v1/redirect?pref_id="+datos.id
            },"json");
 

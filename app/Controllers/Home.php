@@ -86,29 +86,30 @@ class Home extends BaseController
     }
 
     public function feedback(){
+
         $model = new VentaModel();
         $venta = $model->getWhere(['preference_id'=>$this->request->getGet('preference_id')])->getFirstRow();
 
-        dd($venta);
 
         $data = [];
         $data['id_venta'] = $venta['id_venta'];
         $data['payment_id'] = $this->request->getGet('payment_id');
         $data['status'] = $this->request->getGet('status');
+
         $model->save($data);
-	    switch ($this->request->get('status')){
+
+        switch ($this->request->get('status')){
             case 'approved':
                 redirect()->to('aprobada/'.$venta['id_venta']);
                 break;
             case 'pending':
-
                 break;
             case 'rejected':
-
                 break;
             default:
                 break;
         }
+
     }
 
     public function result($id){
@@ -119,15 +120,16 @@ class Home extends BaseController
 
 	public function get_preference(){
         if($this->request->isAJAX()) {
-
+            $modelo = new VentaModel();
+            $data = [];
+            $data['id_producto'] = $this->request->getPost('id_producto');
+            $data['qty'] = $this->request->getPost('quantity');
+            $modelo->save($data);
+            $data['id_venta'] = $modelo->getInsertID();
             \MercadoPago\SDK::setAccessToken(ACCESS_TOKEN_MP);
             $preference = new \MercadoPago\Preference();
-
             $preference->external_reference = "ABC";
-            //$preference->notification_url = "ABC";
-
             $item = new \MercadoPago\Item();
-
             $item->title = $this->request->getPost('description');//$data->description
             $item->quantity = $this->request->getPost('quantity');//$data->quantity;
             $item->unit_price = $this->request->getPost('unit_price');//data->price;
@@ -143,64 +145,12 @@ class Home extends BaseController
             $response = array(
                 'id' => $preference->id,
             );
-
-            $modelo = new VentaModel();
-
-            $data = [];
             $data['preference_id'] = $preference->id;
-            $data['id_producto'] = $this->request->getPost('id_producto');
-            $data['qty'] = $this->request->getPost('quantity');
-
             $modelo->save($data);
-
             return $this->response->setJSON($response);
         } else {
             redirect('home');
         }
     }
 
-	/*
-	 curl -X POST \
-    'https://api.mercadopago.com/checkout/preferences' \
-    -H 'Authorization: Bearer ACCESS_TOKEN_ENV' \
-    -d '{
-  "items": [
-    {
-      "title": "Dummy Title",
-      "description": "Dummy description",
-      "picture_url": "http://www.myapp.com/myimage.jpg",
-      "category_id": "cat123",
-      "quantity": 1,
-      "currency_id": "U$",
-      "unit_price": 10
-    }
-  ],
-  "payer": {
-    "phone": {},
-    "identification": {},
-    "address": {}
-  },
-  "payment_methods": {
-    "excluded_payment_methods": [
-      {}
-    ],
-    "excluded_payment_types": [
-      {}
-    ]
-  },
-  "shipments": {
-    "free_methods": [
-      {}
-    ],
-    "receiver_address": {}
-  },
-  "back_urls": {},
-  "differential_pricing": {},
-  "tracks": [
-    {
-      "type": "google_ad"
-    }
-  ]
-}'
-	*/
 }
