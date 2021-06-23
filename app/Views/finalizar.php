@@ -67,10 +67,13 @@
                                     <div class="as-producttile-title">
                                         <h3 class="as-producttile-name">
                                             <p class="as-producttile-tilelink">
-                                                <span data-ase-truncate="2"><?=$venta['title']?></span>
+                                                <span data-ase-truncate="2">Felicitaciones ya pagaste tu nuevo </span>
                                             </p>
                                         </h3>
                                     </div>
+                                    <h3>
+                                        <?=$venta['title']?>
+                                    </h3>
                                     <h3>
                                         Unidades <?=$venta['qty']?>
                                     </h3>
