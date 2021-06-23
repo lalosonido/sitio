@@ -37,7 +37,7 @@ $routes->get('/', 'Home::index');
 $routes->post('detalle', 'Home::detalle_telefono');
 $routes->post('get_preference', 'Home::get_preference');
 $routes->get('feedback', 'Home::feedback');
-$routes->get('aprobada/(:num)', 'Home::result');
+$routes->get('aprobada/(:num)', 'Home::result/$1');
 
 /*
  * --------------------------------------------------------------------
