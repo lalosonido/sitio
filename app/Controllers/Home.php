@@ -122,7 +122,7 @@ class Home extends BaseController
 
         $uri = $this->request->uri;
 
-        echo var_dump($this->request->getUri()->getSegment(0));
+        echo var_dump($this->request->getUri()->getSegment(1));
 
         die();
 
