@@ -99,7 +99,7 @@ class Home extends BaseController
 
         $model->save($data);
 
-        switch ($this->request->get('status')){
+        switch ($this->request->getGet('status')){
             case 'approved':
                 redirect()->to('aprobada/'.$venta['id_venta']);
                 break;
