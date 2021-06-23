@@ -88,7 +88,7 @@ class Home extends BaseController
     public function feedback(){
 
         $model = new VentaModel();
-        $venta = $model->getWhere(['preference_id'=>$this->request->getGet('preference_id')])->getFirstRow();
+        $venta = $model->find($this->request->getGet('external_reference'));
 
 
         $data = [];
@@ -128,7 +128,7 @@ class Home extends BaseController
             $data['id_venta'] = $modelo->getInsertID();
             \MercadoPago\SDK::setAccessToken(ACCESS_TOKEN_MP);
             $preference = new \MercadoPago\Preference();
-            $preference->external_reference = "ABC";
+            $preference->external_reference = $data['id_venta'];
             $item = new \MercadoPago\Item();
             $item->title = $this->request->getPost('description');//$data->description
             $item->quantity = $this->request->getPost('quantity');//$data->quantity;
