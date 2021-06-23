@@ -21,7 +21,7 @@ class App extends BaseConfig
 	 *
 	 * @var string
 	 */
-	public $baseURL = '';
+	public $baseURL = 'https://gonzaloguerra76-melicert.herokuapp.com/';
 
 	/**
 	 * --------------------------------------------------------------------------
