@@ -80,7 +80,7 @@
                                     <h3>
                                         Total <b>$ <?=$venta['total'] ?></b>
                                     </h3>
-                                    <h3>Estado <span class="text-<?=$estado_color?>"><?=strtoupper($estado)?></span></h3>
+                                    <h3>Estado <span style="color:<?=$venta['estado_color']?>"><?=strtoupper($estado)?></span></h3>
                                     <h3>Confirmación MP <?=$venta['payment_id']?></h3>
                                 </div>
 

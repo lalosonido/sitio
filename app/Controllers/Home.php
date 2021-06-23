@@ -124,15 +124,15 @@ class Home extends BaseController
 
         switch ($data['estado']){
             case 'aprobado':
-                $data['estado_color'] = 'success';
+                $data['estado_color'] = '#76FF03';
                 $data['texto'] = "Felicitaciones ya pagaste tu nuevo ";
                 break;
             case 'pendiente':
-                $data['estado_color'] = 'warning';
+                $data['estado_color'] = '#FDD835';
                 $data['texto'] = "El pago aún se encuentra pendiente, pero no te preocupes, te mandaremos un mail cuando logremos procesarlo";
                 break;
             case 'rechazado':
-                $data['estado_color'] = 'danger';
+                $data['estado_color'] = '#F44336';
                 $data['texto'] = "Lo lamentamos, no pudimos concretar el pago, vuelve a intenarlo con otro medio";
                 break;
         }
