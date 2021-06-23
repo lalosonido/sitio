@@ -118,17 +118,11 @@ class Home extends BaseController
 
     public function result($id){
         $modelo = new VentaModel();
-        $venta = $modelo->get_detalle_venta($id)[0];
-
-        $uri = $this->request->uri;
-
-        echo var_dump($this->request->getUri()->getSegment(1));
-
-        die();
-
+        $data['venta'] = $modelo->get_detalle_venta($id)[0];
+        $data['estado'] = $this->request->getUri()->getSegment(1);
 
         echo view('header');
-        echo view('finalizar', [$venta, $uri->getPath()]);
+        echo view('finalizar', $data);
         echo view('footer');
     }
 

@@ -1,7 +1,4 @@
 <body class="as-theme-light-heroimage">
-<!--<script>
-    const PUBLIC_KEY = "TEST-ac597ab5-9167-45b6-b826-ab9e10d9b3af";
-</script>-->
 <div class="stack">
     <div class="as-search-wrapper" role="main">
         <div class="as-navtuck-wrapper">
