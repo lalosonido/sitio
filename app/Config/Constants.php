@@ -77,3 +77,6 @@ defined('EXIT_USER_INPUT')     || define('EXIT_USER_INPUT', 7); // invalid user 
 defined('EXIT_DATABASE')       || define('EXIT_DATABASE', 8); // database error
 defined('EXIT__AUTO_MIN')      || define('EXIT__AUTO_MIN', 9); // lowest automatically-assigned error code
 defined('EXIT__AUTO_MAX')      || define('EXIT__AUTO_MAX', 125); // highest automatically-assigned error code
+
+
+defined('ACCESS_TOKEN_MP') || define('ACCESS_TOKEN_MP','TEST-7331-052913-382bd4fe11606b1ffeacba42d9a9ab43-36448375');

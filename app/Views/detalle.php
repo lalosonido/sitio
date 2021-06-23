@@ -1,7 +1,7 @@
 <body class="as-theme-light-heroimage">
-<script>
+<!--<script>
     const PUBLIC_KEY = "TEST-ac597ab5-9167-45b6-b826-ab9e10d9b3af";
-</script>
+</script>-->
 <div class="stack">
     <div class="as-search-wrapper" role="main">
         <div class="as-navtuck-wrapper">
@@ -71,6 +71,9 @@
                                         <h3 class="as-producttile-name">
                                             <p class="as-producttile-tilelink">
                                                 <span data-ase-truncate="2"><?php echo $_POST['title'] ?></span>
+                                                <input type="hidden" id="title" value="<?=$_POST['title']?>">
+                                                <input type="hidden" id="price" value="<?=$_POST['price']?>">
+                                                <input type="hidden" id="quantity" value="<?=$_POST['unit']?>">
                                             </p>
                                         </h3>
                                     </div>
@@ -136,7 +139,26 @@
 </div>
 <div id="ac-gn-viewport-emitter"></div>
 <script>
-    // Agrega credenciales de SDK
+
+    $(function (){
+       $(".mercadopago-button").click(function(e){
+           e.preventDefault();
+
+           var description = $("#description").val();
+           var quantity = $('#quantity').val();
+           var unit_price = $('#price').val();//data->price;
+
+           $.post('get_preference',{description:description, quantity:quantity, unit_price:unit_price}, function(datos){
+               document.location = "https://sandbox.mercadopago.com.ar/checkout/v1/redirect?pref_id="+datos.id
+           },"json");
+
+
+       })
+    });
+
+
+
+    /*// Agrega credenciales de SDK
     const mp = new MercadoPago('PUBLIC_KEY', {
                 locale: 'es-AR'
                });
@@ -150,6 +172,10 @@
                     container: '.mercadopago-button', // Indica dónde se mostrará el botón de pago
                     label: 'Pagar', // Cambia el texto del botón de pago (opcional)
                 }
-                });
+                });*/
+
+
+
+
 </script>
 

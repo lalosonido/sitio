@@ -4,35 +4,6 @@ use App\Models\ProductoModel;
 
 class Home extends BaseController
 {
-	public function index()
-	{
-	    helper('form');
-	    $modelo = new ProductoModel();
-        $parser = \Config\Services::parser();
-
-        $productos = $modelo->findAll();
-
-        $datos['contenido'] = '';
-
-        $formulario = form_open('detalle');
-        $template = $this->contenedor;
-
-        foreach ($productos as $producto) {
-            $producto['formulario'] = $formulario;
-            $datos['contenido'] .= $parser->setData($producto)->renderString($template);
-        }
-
-        echo view('header');
-        echo view('inicio',$datos);
-        echo view('footer');
-	}
-
-	public function detalle_telefono(){
-        echo view('header');
-        echo view('detalle');
-        echo view('footer');
-    }
-
     private $contenedor = '<div class="as-producttile large-4 small-6 group-1">
     <div class="as-producttile-tilehero with-paddlenav with-paddlenav-onhover">
         <div class="as-dummy-container as-dummy-img">
@@ -84,25 +55,62 @@ class Home extends BaseController
     </div>
 </div>';
 
+    public function index()
+	{
+	    helper('form');
+	    $modelo = new ProductoModel();
+        $parser = \Config\Services::parser();
+
+        $productos = $modelo->findAll();
+
+        $datos['contenido'] = '';
+
+        $formulario = form_open('detalle');
+        $template = $this->contenedor;
+
+        foreach ($productos as $producto) {
+            $producto['formulario'] = $formulario;
+            $datos['contenido'] .= $parser->setData($producto)->renderString($template);
+        }
+
+        echo view('header');
+        echo view('inicio',$datos);
+        echo view('footer');
+	}
+
+    public function detalle_telefono(){
+        echo view('header');
+        echo view('detalle');
+        echo view('footer');
+    }
+
+    public function feedback(){
+	    dd($_GET);
+    }
+
 	public function get_preference(){
-
-        /*$json = file_get_contents("php://input");
-        $data = json_decode($json);*/
-
         if($this->request->isAJAX()) {
+
+            \MercadoPago\SDK::setAccessToken(ACCESS_TOKEN_MP);
             $preference = new \MercadoPago\Preference();
+
+            $preference->external_reference = "ABC";
+            //$preference->notification_url = "ABC";
+
             $item = new \MercadoPago\Item();
-            $item->title = $this->input->post('description');//$data->description
-            $item->quantity = $this->input->post('quantity');//$data->quantity;
-            $item->unit_price = $this->input->post('price');//data->price;
+
+            $item->title = $this->request->getPost('description');//$data->description
+            $item->quantity = $this->request->getPost('quantity');//$data->quantity;
+            $item->unit_price = $this->request->getPost('unit_price');//data->price;
             $preference->items = array($item);
             $preference->back_urls = array(
-                "success" => "http://localhost:8080/feedback",
-                "failure" => "http://localhost:8080/feedback",
-                "pending" => "http://localhost:8080/feedback"
+                "success" => "http://localhost/mp/feedback",
+                "failure" => "http://localhost/mp/feedback",
+                "pending" => "http://localhost/mp/feedback"
             );
             $preference->auto_return = "approved";
             $preference->save();
+
             $response = array(
                 'id' => $preference->id,
             );
