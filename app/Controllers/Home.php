@@ -99,8 +99,8 @@ class Home extends BaseController
 
         $model->save($data);
 
-        /*echo var_dump($_GET);
-        die();*/
+        echo var_dump([$_GET,$venta]);
+        die();
 
         switch ($this->request->getGet('status')){
             case 'approved':
