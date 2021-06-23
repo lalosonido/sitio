@@ -122,6 +122,9 @@ class Home extends BaseController
 
         $uri = $this->request->uri;
 
+        echo $this->request->getUri()->getSegments();
+
+        die();
 
 
         echo view('header');
