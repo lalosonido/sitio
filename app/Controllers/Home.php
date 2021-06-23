@@ -103,7 +103,7 @@ class Home extends BaseController
             case 'approved':
                 return redirect()->to('aprobada/'.$venta['id_venta']);
                 break;
-            case 'in_proccess':
+            case 'in_process':
                 return redirect()->to('pendiente/'.$venta['id_venta']);
                 break;
             case 'rejected':
