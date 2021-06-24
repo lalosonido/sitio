@@ -140,12 +140,11 @@
     </svg>
 </div>
 <div id="ac-gn-viewport-emitter"></div>
+<script src="https://www.mercadopago.com/v2/security.js" view="item"></script>
 <script>
-
     $(function (){
        $(".mercadopago-button").click(function(e){
            e.preventDefault();
-
            var description = $("#title").val();
            var quantity = $('#quantity').val();
            var unit_price = $('#price').val();
@@ -158,18 +157,12 @@
                function(datos){
 
                document.location = "https://sandbox.mercadopago.com.ar/checkout/v1/redirect?pref_id="+datos.id
-
            },"json");
-
-
        });
-
 
        $("#cant").blur(function(e){
            $("#quantity").val($(this).val());
        });
-
-
 
     });
 

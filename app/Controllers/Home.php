@@ -177,6 +177,10 @@ class Home extends BaseController
             $item->quantity = $this->request->getPost('quantity');
             $item->unit_price = $this->request->getPost('unit_price');
             $item->picture_url = base_url("/assets/".$producto['img']);
+            $item->id = "1234";
+            $item->description = '';
+            $item->currency_id = "ARS";
+            $item->category_id = $producto['id_producto'];
 
             $preference->items = array($item);
             $preference->back_urls = array(
@@ -184,6 +188,9 @@ class Home extends BaseController
                 "failure" => base_url("feedback"),
                 "pending" => base_url("feedback")
             );
+
+            $preference->notification_url = base_url("notificaciones");
+
             $preference->auto_return = "approved";
             $preference->save();
 
