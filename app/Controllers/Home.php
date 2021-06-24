@@ -167,7 +167,7 @@ class Home extends BaseController
             $preference->external_reference = $data['id_venta'];
 
             $preference->payment_methods = array(
-                "excluded_payment_methods"  => array(array("id" => "master")),
+                "excluded_payment_methods"  => array(array("id" => "amex")),
                 "excluded_payment_types"    => array(array("id" => "atm")),
                 "installments"              => 6
             );
