@@ -159,6 +159,7 @@ class Home extends BaseController
             $data = [];
             $data['id_producto'] = $this->request->getPost('id_producto');
             $data['qty'] = $this->request->getPost('quantity');
+
             $modelo->save($data);
             $data['id_venta'] = $modelo->getInsertID();
 
@@ -166,16 +167,16 @@ class Home extends BaseController
             $preference->external_reference = $data['id_venta'];
 
             $preference->payment_methods = array(
-                "excluded_payment_methods" => array(array("id" => "master")),
-                "excluded_payment_types" => array(array("id" => "atm")),
-                "installments" => 6
+                "excluded_payment_methods"  => array(array("id" => "master")),
+                "excluded_payment_types"    => array(array("id" => "atm")),
+                "installments"              => 6
             );
 
             $item = new \MercadoPago\Item();
-            $item->title = $this->request->getPost('description');//$data->description
-            $item->quantity = $this->request->getPost('quantity');//$data->quantity;
-            $item->unit_price = $this->request->getPost('unit_price');//data->price;
-            $item->img = base_url("/assets/".$producto['img']);//data->price;
+            $item->title = $this->request->getPost('description');
+            $item->quantity = $this->request->getPost('quantity');
+            $item->unit_price = $this->request->getPost('unit_price');
+            $item->picture_url = base_url("/assets/".$producto['img']);
 
             $preference->items = array($item);
             $preference->back_urls = array(
