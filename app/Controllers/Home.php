@@ -185,11 +185,11 @@ class Home extends BaseController
                 "pending" => base_url("feedback")
             );
             $preference->auto_return = "approved";
-            $preference->save();
-
             $response = $preference/*array(
                 'id' => $preference->id,
             )*/;
+            $preference->save();
+
             $data['preference_id'] = $preference->id;
             $modelo->save($data);
             return $this->response->setJSON($response);
