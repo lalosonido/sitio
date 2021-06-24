@@ -151,18 +151,34 @@ class Home extends BaseController
 	public function get_preference(){
         if($this->request->isAJAX()) {
             $modelo = new VentaModel();
+            $productos = new ProductoModel();
+            $producto = $productos->get_where(['id_producto'=>$this->request->getPost('id_producto')])->find();
             $data = [];
             $data['id_producto'] = $this->request->getPost('id_producto');
             $data['qty'] = $this->request->getPost('quantity');
             $modelo->save($data);
             $data['id_venta'] = $modelo->getInsertID();
+
             \MercadoPago\SDK::setAccessToken(ACCESS_TOKEN_MP);
+
             $preference = new \MercadoPago\Preference();
             $preference->external_reference = $data['id_venta'];
+
+            $preference->payment_methods = array(
+                "excluded_payment_methods" => array(
+                    array("id" => "master")
+                ),
+                "excluded_payment_types" => array(
+                    array("id" => "atm")
+                ),
+                "installments" => 6
+            );
+
             $item = new \MercadoPago\Item();
             $item->title = $this->request->getPost('description');//$data->description
             $item->quantity = $this->request->getPost('quantity');//$data->quantity;
             $item->unit_price = $this->request->getPost('unit_price');//data->price;
+
             $preference->items = array($item);
             $preference->back_urls = array(
                 "success" => base_url("feedback"),
@@ -183,4 +199,62 @@ class Home extends BaseController
         }
     }
 
+
+    /*{
+    "items": [
+        {
+            "id": "item-ID-1234",
+            "title": "Mi producto",
+            "currency_id": "ARS",
+            "picture_url": "https://www.mercadopago.com/org-img/MP3/home/logomp3.gif",
+            "description": "Descripción del Item",
+            "category_id": "art",
+            "quantity": 1,
+            "unit_price": 75.76
+        }
+    ],
+    "payer": {
+        "name": "Juan",
+        "surname": "Lopez",
+        "email": "user@email.com",
+        "phone": {
+            "area_code": "11",
+            "number": "4444-4444"
+        },
+        "identification": {
+            "type": "DNI",
+            "number": "12345678"
+        },
+        "address": {
+            "street_name": "Street",
+            "street_number": 123,
+            "zip_code": "5700"
+        }
+    },
+    "back_urls": {
+        "success": "https://www.success.com",
+        "failure": "http://www.failure.com",
+        "pending": "http://www.pending.com"
+    },
+    "auto_return": "approved",
+    "payment_methods": {
+        "excluded_payment_methods": [
+            {
+                "id": "master"
+            }
+        ],
+        "excluded_payment_types": [
+            {
+                "id": "ticket"
+            }
+        ],
+        "installments": 12
+    },
+    "notification_url": "https://www.your-site.com/ipn",
+    "statement_descriptor": "MINEGOCIO",
+    "external_reference": "Reference_1234",
+    "expires": true,
+    "expiration_date_from": "2016-02-01T12:00:00.000-04:00",
+    "expiration_date_to": "2016-02-28T12:00:00.000-04:00"
+}*/
 }
