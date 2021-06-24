@@ -156,7 +156,11 @@
                                     unit_price:unit_price,
                                     id_producto:id_producto},
                function(datos){
-               document.location = "https://sandbox.mercadopago.com.ar/checkout/v1/redirect?pref_id="+datos.id
+
+               console.log(datos);
+
+
+               //document.location = "https://sandbox.mercadopago.com.ar/checkout/v1/redirect?pref_id="+datos.id
            },"json");
 
 
