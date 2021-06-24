@@ -189,7 +189,7 @@ class Home extends BaseController
 
             $response = array(
                 'id' => $preference->id,
-                'item'=> $item
+                'item'=> $item->toArray()
             );
 
             $data['preference_id'] = $preference->id;
