@@ -178,7 +178,7 @@ class Home extends BaseController
             $item->title = $this->request->getPost('description');//$data->description
             $item->quantity = $this->request->getPost('quantity');//$data->quantity;
             $item->unit_price = $this->request->getPost('unit_price');//data->price;
-            $item->img = base_url("/assets/".$producto->img);//data->price;
+            $item->img = base_url("/assets/".$producto['img']);//data->price;
 
             $preference->items = array($item);
             $preference->back_urls = array(
