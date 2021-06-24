@@ -187,9 +187,9 @@ class Home extends BaseController
             $preference->auto_return = "approved";
             $preference->save();
 
-            $response = array(
+            $response = $preference/*array(
                 'id' => $preference->id,
-            );
+            )*/;
             $data['preference_id'] = $preference->id;
             $modelo->save($data);
             return $this->response->setJSON($response);
