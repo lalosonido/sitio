@@ -188,10 +188,10 @@ class Home extends BaseController
             $response = $preference/*array(
                 'id' => $preference->id,
             )*/;
-            $preference->save();
+            //$preference->save();
 
-            $data['preference_id'] = $preference->id;
-            $modelo->save($data);
+            /*$data['preference_id'] = $preference->id;
+            $modelo->save($data);*/
             return $this->response->setJSON($response);
         } else {
             redirect('home');
