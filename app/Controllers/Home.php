@@ -47,7 +47,7 @@ class Home extends BaseController
             </div>
         </div>
         <form action="detalle" method="post">
-            <input type="hidden" name="img" value="./assets/{img}">
+            <input type="hidden" name="img" value="{img}">
             <input type="hidden" name="title" value="{title}">
             <input type="hidden" name="price" value="{price}">
             <input type="hidden" name="unit" value="1">
@@ -82,7 +82,7 @@ class Home extends BaseController
 
     public function detalle_telefono(){
         echo view('header');
-        echo view('detalle');
+        echo view('detalle_v2');
         echo view('footer');
     }
 
