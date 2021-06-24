@@ -150,27 +150,24 @@ class Home extends BaseController
 
 	public function get_preference(){
         if($this->request->isAJAX()) {
+
+            \MercadoPago\SDK::setAccessToken(ACCESS_TOKEN_MP);
+
             $modelo = new VentaModel();
             $productos = new ProductoModel();
-            $producto = $productos->get_where(['id_producto'=>$this->request->getPost('id_producto')])->find();
+            $producto = $productos->find($this->request->getPost('id_producto'));
             $data = [];
             $data['id_producto'] = $this->request->getPost('id_producto');
             $data['qty'] = $this->request->getPost('quantity');
             $modelo->save($data);
             $data['id_venta'] = $modelo->getInsertID();
 
-            \MercadoPago\SDK::setAccessToken(ACCESS_TOKEN_MP);
-
             $preference = new \MercadoPago\Preference();
             $preference->external_reference = $data['id_venta'];
 
             $preference->payment_methods = array(
-                "excluded_payment_methods" => array(
-                    array("id" => "master")
-                ),
-                "excluded_payment_types" => array(
-                    array("id" => "atm")
-                ),
+                "excluded_payment_methods" => array(array("id" => "master")),
+                "excluded_payment_types" => array(array("id" => "atm")),
                 "installments" => 6
             );
 
