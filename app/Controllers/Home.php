@@ -165,7 +165,7 @@ class Home extends BaseController
         $datos = json_decode($this->request->getPost());
         $array_data = $datos->data;
         unset($datos->data);
-        $model->save($datos);
+        $model->save((array)$datos);
         $id_notificacion = $model->getInsertID();
         $noti_data = new NotificacionDataModel();
 
