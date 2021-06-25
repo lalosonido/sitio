@@ -98,7 +98,7 @@ class Home extends BaseController
         $producto = $productos->find($this->request->getPost('id_producto'));
         $data = [];
         $data['id_producto'] = $this->request->getPost('id_producto');
-        $data['qty'] = $this->request->getPost('quantity');
+        $data['qty'] = $this->request->getPost('unit');
 
         $modelo->save($data);
         $data['id_venta'] = $modelo->getInsertID();
@@ -113,8 +113,8 @@ class Home extends BaseController
         );
 
         $item = new \MercadoPago\Item();
-        $item->title = $this->request->getPost('description');
-        $item->quantity = $this->request->getPost('quantity');
+        $item->title = $this->request->getPost('title');
+        $item->quantity = $this->request->getPost('unit');
         $item->unit_price = $this->request->getPost('unit_price');
         $item->picture_url = base_url("/assets/".$producto['img']);
         $item->id = "1234";
