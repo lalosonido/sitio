@@ -183,6 +183,9 @@ class Home extends BaseController
 
     public function feedback(){
 
+
+
+
         $model = new VentaModel();
         $venta = $model->find($this->request->getGet('external_reference'));
 

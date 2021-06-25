@@ -88,7 +88,7 @@
                                         <?php echo "$" . $_POST['price'] ?>
                                     </h3>
                                 </div>
-                                <button type="submit" class="mercadopago-button cho-container" formmethod="post">Pagar</button>
+                                <div class="cho-container"></div>
                             </div>
                         </div>
                     </div>
