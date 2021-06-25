@@ -55,7 +55,7 @@
                                              data-relatedlink="6|Powerbeats3 Wireless Earphones - Neighborhood Collection - Brick Red|MPXP2">
                                             <div class="as-tilegallery-element as-image-selected">
                                                 <div class=""></div>
-                                                <img src="./assets/<?=base_url('assets/'.$_POST['img'])?>"
+                                                <img src="<?=base_url('assets/'.$_POST['img'])?>"
                                                      class="ir ir item-image as-producttile-image" alt="" width="445"
                                                      height="445"
                                                      style="content:-webkit-image-set(url(<?php echo $_POST['img'] ?>) 2x);">
@@ -145,30 +145,12 @@
 <script src="https://www.mercadopago.com/v2/security.js" view="item"></script>
 <script>
     $(function (){
-        /*$(".mercadopago-button").click(function(e){
-            e.preventDefault();
-            var description = $("#title").val();
-            var quantity = $('#quantity').val();
-            var unit_price = $('#price').val();
-            var id_producto = $("#id_producto").val();
-
-            $.post('get_preference',{description:description,
-                                     quantity:quantity,
-                                     unit_price:unit_price,
-                                     id_producto:id_producto},
-                function(datos){
-
-                document.location = "https://sandbox.mercadopago.com.ar/checkout/v1/redirect?pref_id="+datos.id
-            },"json");
-        });
-
-*/
         $("#cant").blur(function(e){
             $("#quantity").val($(this).val());
         });
 
         // Agrega credenciales de SDK
-        const mp = new MercadoPago('TEST-ac597ab5-9167-45b6-b826-ab9e10d9b3af', {
+        const mp = new MercadoPago('<?=PUBLIC_KEY?>', {
             locale: 'es-AR'
         });
 

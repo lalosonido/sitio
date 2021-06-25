@@ -1,5 +1,7 @@
 <?php namespace App\Controllers;
 
+use App\Models\NotificacionesModel;
+use App\Models\NotificacionModel;
 use App\Models\ProductoModel;
 use App\Models\VentaModel;
 
@@ -81,9 +83,106 @@ class Home extends BaseController
 	}
 
     public function detalle_telefono(){
+
+        echo view('header');
+        echo view('detalle');
+        echo view('footer');
+    }
+
+    public function detalle_v2(){
+
+        \MercadoPago\SDK::setAccessToken(ACCESS_TOKEN_MP);
+
+        $modelo = new VentaModel();
+        $productos = new ProductoModel();
+        $producto = $productos->find($this->request->getPost('id_producto'));
+        $data = [];
+        $data['id_producto'] = $this->request->getPost('id_producto');
+        $data['qty'] = $this->request->getPost('quantity');
+
+        $modelo->save($data);
+        $data['id_venta'] = $modelo->getInsertID();
+
+        $preference = new \MercadoPago\Preference();
+        $preference->external_reference = $data['id_venta'];
+
+        $preference->payment_methods = array(
+            "excluded_payment_methods"  => array(array("id" => "amex")),
+            "excluded_payment_types"    => array(array("id" => "atm")),
+            "installments"              => 6
+        );
+
+        $item = new \MercadoPago\Item();
+        $item->title = $this->request->getPost('description');
+        $item->quantity = $this->request->getPost('quantity');
+        $item->unit_price = $this->request->getPost('unit_price');
+        $item->picture_url = base_url("/assets/".$producto['img']);
+        $item->id = "1234";
+        $item->description = '';
+        $item->currency_id = "ARS";
+        $item->category_id = $producto['id_producto'];
+
+        $preference->items = array($item);
+        $preference->back_urls = array(
+            "success" => base_url("feedback"),
+            "failure" => base_url("feedback"),
+            "pending" => base_url("feedback")
+        );
+
+        $preference->notification_url = base_url("notificacion");
+
+        $preference->auto_return = "approved";
+        $preference->save();
+
+        $response = array(
+            'id' => $preference->id,
+            'item'=> $item->toArray()
+        );
+
+        $data['preference_id'] = $preference->id;
+        $modelo->save($data);
+
+
         echo view('header');
         echo view('detalle_v2');
         echo view('footer');
+
+    }
+
+    public function notificacion(){
+        /*
+             {
+                "id": 12345,
+                "live_mode": true,
+                "type": "payment",
+                "date_created": "2015-03-25T10:04:58.396-04:00",
+                "application_id": 123123123,
+                "user_id": 44444,
+                "version": 1,
+                "api_version": "v1",
+                "action": "payment.created",
+                "data": {
+                    "id": "999999999"
+                }
+            }
+        */
+
+            $model = new NotificacionModel();
+            $datos = json_decode($this->request->getPost());
+            $array_data = $datos->data;
+            unset($datos->data);
+            $model->save($datos);
+            $id_notificacion = $model->getInsertID();
+            $noti_data = new NotificacionDataModel();
+
+            foreach ($array_data as $item) {
+                $elem = [];
+                $elem['id_notificacion'] = $id_notificacion;
+                $elem['id'] = $item['id'];
+                $noti_data->save($elem);
+            }
+
+            return $this->response->setStatusCode(200);
     }
 
     public function feedback(){

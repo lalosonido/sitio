@@ -1,6 +1,4 @@
-<?php
-
-namespace Config;
+<?php namespace Config;
 
 // Create a new instance of our RouteCollection class.
 $routes = Services::routes();
@@ -24,7 +22,6 @@ $routes->setTranslateURIDashes(false);
 $routes->set404Override();
 $routes->setAutoRoute(true);
 
-
 /*
  * --------------------------------------------------------------------
  * Route Definitions
@@ -37,6 +34,7 @@ $routes->get('/', 'Home::index');
 $routes->post('detalle', 'Home::detalle_telefono');
 $routes->post('get_preference', 'Home::get_preference');
 $routes->get('feedback', 'Home::feedback');
+$routes->get('notificacion', 'Home::notificacion');
 $routes->get('aprobada/(:num)', 'Home::result/$1');
 $routes->get('pendiente/(:num)', 'Home::result/$1');
 $routes->get('rechazado/(:num)', 'Home::result/$1');
