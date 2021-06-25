@@ -183,8 +183,25 @@ class Home extends BaseController
 
     public function feedback(){
 
+
+        /*
+            feedback?
+                collection_id=15525192621
+                collection_status=approved
+                payment_id=15525192621
+                status=approved
+                external_reference=gonzaloguerra76@gmail.com
+                payment_type=credit_card
+                merchant_order_id=2857813551
+                preference_id=469485398-1d1fad3f-9293-41b4-b289-d4d3270792cb
+                site_id=MLA
+                processing_mode=aggregator
+                merchant_account_id=null
+        */
+
+
         $model = new VentaModel();
-        $venta = $model->where('preference_id', $this->request->getGet('preference_id'))->find();
+        $venta = $model->where('preference_id', "'".$this->request->getGet('preference_id')."'")->find();
 
 
         $data = [];
