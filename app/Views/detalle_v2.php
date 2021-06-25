@@ -77,15 +77,11 @@
                                             </p>
                                         </h3>
                                     </div>
-                                    <div class="form-group">
-                                        <label for="cant">Cantidad</label>
-                                        <input type="number" class="form-control" id="cant" value="<?=$_POST['unit']?>"/>
-                                    </div>
-<!--                                    <h3>
-                                        <?php /*echo $_POST['unit'] */?>
-                                    </h3>-->
                                     <h3>
-                                        <?php echo "$" . $_POST['price'] ?>
+                                        <?=$_POST['unit']?>
+                                    </h3>
+                                    <h3>
+                                        <?="$" . $_POST['price'] ?>
                                     </h3>
                                 </div>
                                 <div class="cho-container"></div>
@@ -145,9 +141,6 @@
 <script src="https://www.mercadopago.com/v2/security.js" view="item"></script>
 <script>
     $(function (){
-        $("#cant").blur(function(e){
-            $("#quantity").val($(this).val());
-        });
 
         // Agrega credenciales de SDK
         const mp = new MercadoPago('<?=PUBLIC_KEY?>', {
@@ -160,33 +153,12 @@
                 id: '<?=$preference_id?>'
             },
             render: {
-                container: '.cho-container', // Indica dónde se mostrará el botón de pago
-                label: 'Pagar', // Cambia el texto del botón de pago (opcional)
+                container: '.cho-container',
+                label: 'Pagar',
             }
         });
 
     });
-
-
-
-    /*// Agrega credenciales de SDK
-    const mp = new MercadoPago('PUBLIC_KEY', {
-                locale: 'es-AR'
-               });
-
-                // Inicializa el checkout
-        mp.checkout({
-                preference: {
-                        id: 'YOUR_PREFERENCE_ID'
-                },
-                render: {
-                    container: '.mercadopago-button', // Indica dónde se mostrará el botón de pago
-                    label: 'Pagar', // Cambia el texto del botón de pago (opcional)
-                }
-                });*/
-
-
-
 
 </script>
 
