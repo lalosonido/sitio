@@ -49,10 +49,11 @@ class Home extends BaseController
                 ${price}
             </div>
         </div>
-        <form action="detalle" method="post">
+        <form action="comprador" method="post">
             <input type="hidden" name="img" value="{img}">
             <input type="hidden" name="title" value="{title}">
             <input type="hidden" name="price" value="{price}">
+            <input type="hidden" name="descripcion" value="Dispositivo móvil de Tienda e-commerce">
             <input type="hidden" name="unit" value="1">
             <input type="hidden" name="id_producto" value="{id_producto}">
             <button type="submit" class="mercadopago-button" formmethod="post">Comprar</button>
@@ -83,11 +84,24 @@ class Home extends BaseController
         echo view('footer');
 	}
 
+
+
     public function detalle_telefono(){
 
         echo view('header');
         echo view('detalle');
         echo view('footer');
+    }
+
+    public function datos_comprador(){
+
+        $data = $_POST;
+        helper('form');
+
+        echo view('header');
+        echo view('comprador', $data);
+        echo view('footer');
+
     }
 
     public function detalle_v2(){
@@ -99,14 +113,32 @@ class Home extends BaseController
         $producto = $productos->find($this->request->getPost('id_producto'));
         $data = [];
         $data['id_producto'] = $this->request->getPost('id_producto');
+
         $data['qty'] = $this->request->getPost('unit');
+
+        $comprador = new \MercadoPago\Payer();
+
+        $comprador->name = $this->request->getPost('nombre');
+        $comprador->surname = $this->request->getPost('apellido');
+        $comprador->email = $this->request->getPost('email');
+
+        $comprador->phone = array(
+            "area_code" => $this->request->getPost('cod_area'),
+            "number" => $this->request->getPost('numero')
+        );
+
+        $comprador->address = array(
+            "street_name" => $this->request->getPost('calle'),
+            "street_number" => $this->request->getPost('numero_casa'),
+            "zip_code" => $this->request->getPost('cp')
+        );
 
         $modelo->save($data);
         $data['id_venta'] = $modelo->getInsertID();
 
         $preference = new \MercadoPago\Preference();
         $preference->external_reference = 'gonzaloguerra76@gmail.com';//$data['id_venta'];
-
+        $preference->payer = $comprador;
         $preference->payment_methods = array(
             "excluded_payment_methods"  => array(array("id" => "amex")),
             "excluded_payment_types"    => array(array("id" => "atm")),
@@ -332,7 +364,7 @@ class Home extends BaseController
             "unit_price": 75.76
         }
     ],
-    "payer": {
+    "comprador": {
         "name": "Juan",
         "surname": "Lopez",
         "email": "user@email.com",

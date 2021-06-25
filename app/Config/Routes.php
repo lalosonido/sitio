@@ -32,6 +32,7 @@ $routes->setAutoRoute(true);
 // route since we don't have to scan directories.
 $routes->get('/', 'Home::index');
 $routes->post('detalle', 'Home::detalle_v2');
+$routes->post('comprador', 'Home::datos_comprador');
 $routes->post('get_preference', 'Home::get_preference');
 $routes->get('feedback', 'Home::feedback');
 $routes->post('notificacion', 'Home::notificacion');

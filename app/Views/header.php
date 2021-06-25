@@ -6,21 +6,18 @@
 
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="format-detection" content="telephone=no">
-
     <script
         src="https://code.jquery.com/jquery-3.4.1.min.js"
         integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
         crossorigin="anonymous"></script>
-
     <script src="https://secure.mlstatic.com/sdk/javascript/v1/mercadopago.js"></script>
-
     <link rel="stylesheet" href="<?=base_url()?>/assets/category-landing.css" media="screen, print">
-
     <link rel="stylesheet" href="<?=base_url()?>/assets/category.css" media="screen, print">
-
     <link rel="stylesheet" href="<?=base_url()?>/assets/merch-tools.css" media="screen, print">
-
     <link rel="stylesheet" href="<?=base_url()?>/assets/fonts" media="">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+
     <style>
         .as-filter-button-text {
             font-size: 26px;
