@@ -202,7 +202,7 @@ class Home extends BaseController
 
         $model = new VentaModel();
         $venta = $model->where('preference_id', $this->request->getGet('preference_id'))->find();
-        echo $this->db->getLastQuery();
+        echo $model->getLastQuery();
 
         $data = [];
         $data['id_venta'] = $venta['id_venta'];
