@@ -105,7 +105,7 @@ class Home extends BaseController
         $data['id_venta'] = $modelo->getInsertID();
 
         $preference = new \MercadoPago\Preference();
-        $preference->external_reference = $data['id_venta'];
+        $preference->external_reference = 'gonzaloguerra76@gmail.com';//$data['id_venta'];
 
         $preference->payment_methods = array(
             "excluded_payment_methods"  => array(array("id" => "amex")),
@@ -183,11 +183,8 @@ class Home extends BaseController
 
     public function feedback(){
 
-
-
-
         $model = new VentaModel();
-        $venta = $model->find($this->request->getGet('external_reference'));
+        $venta = $model->where('preference_id', $this->request->getGet('preference_id'))->find();
 
 
         $data = [];
