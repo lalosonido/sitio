@@ -34,7 +34,7 @@ $routes->get('/', 'Home::index');
 $routes->post('detalle', 'Home::detalle_v2');
 $routes->post('get_preference', 'Home::get_preference');
 $routes->get('feedback', 'Home::feedback');
-$routes->get('notificacion', 'Home::notificacion');
+$routes->post('notificacion', 'Home::notificacion');
 $routes->get('aprobada/(:num)', 'Home::result/$1');
 $routes->get('pendiente/(:num)', 'Home::result/$1');
 $routes->get('rechazado/(:num)', 'Home::result/$1');
