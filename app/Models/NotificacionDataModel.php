@@ -4,7 +4,7 @@
 namespace App\Models;
 
 
-class NotificationDataModel extends \CodeIgniter\Model
+class NotificacionDataModel extends \CodeIgniter\Model
 {
     protected $table = "notificacion_data";
     protected $primaryKey = 'id_notificacion_data';

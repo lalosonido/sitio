@@ -1,5 +1,6 @@
 <?php namespace App\Controllers;
 
+use App\Models\NotificacionDataModel;
 use App\Models\NotificacionesModel;
 use App\Models\NotificacionModel;
 use App\Models\ProductoModel;
@@ -162,9 +163,10 @@ class Home extends BaseController
             }
         */
         $model = new NotificacionModel();
-        $datos = json_decode($this->request->getPost());
-        $array_data = $datos->data;
-        unset($datos->data);
+        $contenido = trim(file_get_contents("php://input"));
+        $datos = json_decode($contenido,true);
+        $array_data = $datos['data'];
+        unset($datos['data']);
         $model->save((array)$datos);
         $id_notificacion = $model->getInsertID();
         $noti_data = new NotificacionDataModel();
@@ -172,7 +174,7 @@ class Home extends BaseController
         foreach ($array_data as $item) {
             $elem = [];
             $elem['id_notificacion'] = $id_notificacion;
-            $elem['id'] = $item['id'];
+            $elem['id'] = $item;
             $noti_data->save($elem);
         }
 
