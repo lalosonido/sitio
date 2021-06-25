@@ -115,7 +115,7 @@ class Home extends BaseController
         $item = new \MercadoPago\Item();
         $item->title = $this->request->getPost('title');
         $item->quantity = $this->request->getPost('unit');
-        $item->unit_price = $this->request->getPost('unit_price');
+        $item->unit_price = $this->request->getPost('price');
         $item->picture_url = base_url("/assets/".$producto['img']);
         $item->id = "1234";
         $item->description = '';
@@ -133,10 +133,6 @@ class Home extends BaseController
 
         $preference->auto_return = "approved";
         $preference->save();
-
-        $response = array(
-            'id' => $preference->id
-        );
 
         $data['preference_id'] = $preference->id;
         $modelo->save($data);
