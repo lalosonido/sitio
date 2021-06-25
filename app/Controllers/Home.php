@@ -135,8 +135,7 @@ class Home extends BaseController
         $preference->save();
 
         $response = array(
-            'id' => $preference->id,
-            'item'=> $item->toArray()
+            'id' => $preference->id
         );
 
         $data['preference_id'] = $preference->id;
@@ -144,7 +143,7 @@ class Home extends BaseController
 
 
         echo view('header');
-        echo view('detalle_v2');
+        echo view('detalle_v2', $data);
         echo view('footer');
 
     }
@@ -166,23 +165,22 @@ class Home extends BaseController
                 }
             }
         */
+        $model = new NotificacionModel();
+        $datos = json_decode($this->request->getPost());
+        $array_data = $datos->data;
+        unset($datos->data);
+        $model->save($datos);
+        $id_notificacion = $model->getInsertID();
+        $noti_data = new NotificacionDataModel();
 
-            $model = new NotificacionModel();
-            $datos = json_decode($this->request->getPost());
-            $array_data = $datos->data;
-            unset($datos->data);
-            $model->save($datos);
-            $id_notificacion = $model->getInsertID();
-            $noti_data = new NotificacionDataModel();
+        foreach ($array_data as $item) {
+            $elem = [];
+            $elem['id_notificacion'] = $id_notificacion;
+            $elem['id'] = $item['id'];
+            $noti_data->save($elem);
+        }
 
-            foreach ($array_data as $item) {
-                $elem = [];
-                $elem['id_notificacion'] = $id_notificacion;
-                $elem['id'] = $item['id'];
-                $noti_data->save($elem);
-            }
-
-            return $this->response->setStatusCode(200);
+        return $this->response->setStatusCode(200);
     }
 
     public function feedback(){

@@ -88,7 +88,7 @@
                                         <?php echo "$" . $_POST['price'] ?>
                                     </h3>
                                 </div>
-                                <button type="submit" class="mercadopago-button" formmethod="post">Pagar</button>
+                                <button type="submit" class="mercadopago-button cho-container" formmethod="post">Pagar</button>
                             </div>
                         </div>
                     </div>
@@ -157,7 +157,7 @@
         // Inicializa el checkout
         mp.checkout({
             preference: {
-                id: 'YOUR_PREFERENCE_ID'
+                id: '<?=$preference_id?>'
             },
             render: {
                 container: '.cho-container', // Indica dónde se mostrará el botón de pago
